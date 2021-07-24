@@ -1,16 +1,22 @@
 import React from 'react';
 import main from './assets/main.png';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
-
+import data from './data.json';
 export default function App() {
   console.disableYellowBox = true;
   //return 구문 밖에서는 슬래시 두개 방식으로 주석
+
+  let tip = data.tip;
+  let todayWeather = 10 + 17;
+  let todayCondition = "흐림"
+
   return (
     /*
       return 구문 안에서는 {슬래시 + * 방식으로 주석
     */
     <ScrollView style={styles.container}>
       <Text style={styles.title}>나만의 꿀팁</Text>
+      <Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
       <Image style={styles.mainImage} source={main}/>
       <ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
         <TouchableOpacity style={styles.middleButton01}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
@@ -19,18 +25,20 @@ export default function App() {
         <TouchableOpacity style={styles.middleButton04}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
       </ScrollView>
       <View style={styles.cardContainer}>
-        {/* 하나의 카드 영역을 나타내는 View */}
-        <View style={styles.card}>
-          <Image style={styles.cardImage} source={{uri:"https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2Fpizza.png?alt=media&token=1a099927-d818-45d4-b48a-7906fd0d2ad3"}}/>
-          <View style={styles.cardText}>
-            <Text style={styles.cardTitle}>먹다 남은 피자를 촉촉하게!</Text>
-            <Text style={styles.cardDesc} numberOfLines={3}>먹다 남은 피자는 수분이 날라가기 때문에 처음처럼 맛있게 먹을 수 없는데요. 이럴 경우 그릇에 물을 받아 전자레인지 안에서 1분 30초에서 2분 정도 함께 돌려주면 촉촉하게 먹을 수 있습니다. 물이 전자레인지 안에서 수증기를 일으키고, 피자에 촉촉함을 더해줍니다.</Text>
-            <Text style={styles.cardDate}>2021.07.25</Text>
-          </View>
-        </View>
-        
+         {/* 하나의 카드 영역을 나타내는 View */}
+         { 
+          tip.map((content,i)=>{
+            return (<View style={styles.card} key={i}>
+              <Image style={styles.cardImage} source={{uri:content.image}}/>
+              <View style={styles.cardText}>
+                <Text style={styles.cardTitle} numberOfLines={1}>{content.title}</Text>
+                <Text style={styles.cardDesc} numberOfLines={3}>{content.desc}</Text>
+                <Text style={styles.cardDate}>{content.date}</Text>
+              </View>
+            </View>)
+          })
+         }
       </View>
-   
     </ScrollView>
   );
 }
@@ -47,8 +55,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     //위 공간으로 부터 이격
     marginTop:50,
-	    //왼쪽 공간으로 부터 이격'
+    //왼쪽 공간으로 부터 이격
     marginLeft:20
+  },
+  weather:{
+    alignSelf:"flex-end",
+    paddingRight:20
   },
   mainImage: {
     //컨텐츠의 넓이 값
@@ -61,13 +73,11 @@ const styles = StyleSheet.create({
     //컨텐츠 자체가 앱에서 어떤 곳에 위치시킬지 결정(정렬기능)
     //각 속성의 값들은 공식문서에 고대로~ 나와 있음
     alignSelf:"center"
-    // aligItems flex일때
   },
   middleContainer:{
     marginTop:20,
     marginLeft:10,
-    height:60,
-    // borderWidth:1 영역을 눈으로 보기 위해
+    height:60
   },
   middleButton01: {
     width:100,
@@ -94,6 +104,12 @@ const styles = StyleSheet.create({
     borderRadius:15,
     margin:7
   },
+  middleButtonText: {
+    color:"#fff",
+    fontWeight:"700",
+    //텍스트의 현재 위치에서의 정렬 
+    textAlign:"center"
+  },
   middleButton04: {
     width:100,
     height:50,
@@ -102,14 +118,7 @@ const styles = StyleSheet.create({
     borderRadius:15,
     margin:7
   },
-  middleButtonText: {
-    color:"#fff",
-    fontWeight:"700",
-    //텍스트의 현재 위치에서의 정렬 
-    textAlign:"center"
-  },
   cardContainer: {
-    // borderWidth:1
     marginTop:10,
     marginLeft:10
   },
@@ -145,7 +154,7 @@ const styles = StyleSheet.create({
   cardDate: {
     fontSize:10,
     color:"#A6A6A6",
-  }
+  },
 
 
 });
