@@ -25,7 +25,7 @@ export default function App() {
           <View style={styles.cardText}>
             <Text style={styles.cardTitle}>먹다 남은 피자를 촉촉하게!</Text>
             <Text style={styles.cardDesc} numberOfLines={3}>먹다 남은 피자는 수분이 날라가기 때문에 처음처럼 맛있게 먹을 수 없는데요. 이럴 경우 그릇에 물을 받아 전자레인지 안에서 1분 30초에서 2분 정도 함께 돌려주면 촉촉하게 먹을 수 있습니다. 물이 전자레인지 안에서 수증기를 일으키고, 피자에 촉촉함을 더해줍니다.</Text>
-            <Text style={styles.cardDate}>2021.07.25</Text>
+            <Text style={styles.cardDate}>2020.09.09</Text>
           </View>
         </View>
         
@@ -61,13 +61,11 @@ const styles = StyleSheet.create({
     //컨텐츠 자체가 앱에서 어떤 곳에 위치시킬지 결정(정렬기능)
     //각 속성의 값들은 공식문서에 고대로~ 나와 있음
     alignSelf:"center"
-    // aligItems flex일때
   },
   middleContainer:{
     marginTop:20,
     marginLeft:10,
-    height:60,
-    // borderWidth:1 영역을 눈으로 보기 위해
+    height:60
   },
   middleButton01: {
     width:100,
@@ -109,7 +107,6 @@ const styles = StyleSheet.create({
     textAlign:"center"
   },
   cardContainer: {
-    // borderWidth:1
     marginTop:10,
     marginLeft:10
   },
